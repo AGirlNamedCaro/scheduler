@@ -2,7 +2,6 @@
  * This file takes in 3 props
  * array, number, function
  */
-//TODO creating a controlled list -- OPTIONAL - Monday: Listing Interviewers II
 
  import React from 'react';
  import "components/InterviewList.scss";
