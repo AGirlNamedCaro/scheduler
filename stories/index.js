@@ -152,4 +152,11 @@ storiesOf("InterviewerList", module)
      .add("Empty", () => 
      <Empty 
      onAdd = {action("onAdd")}
+     />)
+     .add("Show", () => 
+     <Show 
+      student="Lydia Miller-Jones"
+      interviewer= {interviewers}
+      onEdit={action("onEdit")}
+      onDelete={action("onDelete")}
      />);
