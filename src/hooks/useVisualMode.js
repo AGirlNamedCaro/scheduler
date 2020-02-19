@@ -10,16 +10,16 @@ export default function useVisualMode(initial) {
   const [history,setHistory] = useState([initial]);
   //return an object with a property mode
   const transition = (mode, replace = false) => {
+    console.log('BEFORE: ' ,history);
     if(replace) {
-      //  console.log("history", history);
-      //  console.log("index to be replaced: ", history.indexOf(mode));
-      //  console.log('setHistory', setHistory([initial]) );
-      //  console.log('updatedHistory', history);
+    
       history.pop();
       
     }
     history.push(mode);
     setMode(mode);
+    console.log('After: ' ,history);
+
   }
   const back = (mode) => {
    //we need to access the previous index in our history
