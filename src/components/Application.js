@@ -4,7 +4,7 @@ import DayList from "components/DayList";
 import 'components/Appointment';
 import Appointment from "./Appointment";
 import axios from 'axios';
-import {getAppointmentsForDay, getInterview} from '../helpers/selectors'
+import {getAppointmentsForDay, getInterview, getInterviewersForDay} from '../helpers/selectors'
 
 
 
@@ -38,7 +38,7 @@ export default function Application(props) {
     .then((all) => {
       setState(prev => ({...prev, days: all[0].data,appointments: all[1].data, interviewers: all[2].data }));
     })
-  });
+  },[]);
 
   
   return (
@@ -73,12 +73,15 @@ export default function Application(props) {
         {/* Replace this with the schedule elements durint the "The Scheduler" activity. */}
         { getAppointmentsForDay(state,state.day).map(appointment => {
           const interview = getInterview(state, appointment.interview);
+          const interviewers = getInterviewersForDay(state, state.day)
           return (
 
             <Appointment
             key={appointment.id}
             {...appointment}
             interview={interview}
+            interviewers={interviewers}
+            
             />
             
           )

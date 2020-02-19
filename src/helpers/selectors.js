@@ -19,7 +19,6 @@ export function getInterview(state, interview) {
   if(!interview) {
     return null;
   }
-  console.log("interviewer: ", state.interviewers);
   const interviewObject = {};
   for(const key in state.interviewers) {
     if(Number(key) === interview.interviewer) {
@@ -32,4 +31,21 @@ export function getInterview(state, interview) {
     
       return interviewObject;
 
+}
+
+export function getInterviewersForDay(state, day) {
+  const filteredDays = state.days.filter( dayObj => dayObj.name === day);
+  const matchingArray = [];
+
+  for(const key in state.interviewers) {
+    for(const key2 of filteredDays) {
+      for(let i = 0; i < key2.interviewers.length; i++) {
+        
+        if(Number(key) === key2.interviewers[i]) {
+          matchingArray.push(state.interviewers[key]);
+        }
+      }
+    }
+  }
+  return matchingArray;
 }

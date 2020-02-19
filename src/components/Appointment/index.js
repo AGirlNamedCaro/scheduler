@@ -6,7 +6,7 @@ import Empty from "./Empty";
 import Form from "./Form";
 import './styles.scss';
 import  useVisualMode  from "hooks/useVisualMode";
-
+import { getInterviewersByDay } from 'helpers/selectors';
 
 
 
@@ -32,7 +32,7 @@ export default function Appointment(props) {
       )}
       {mode === CREATE && (
         <Form
-        interviewers={[]}
+        interviewers={props.interviewers}
         onCancel = {() => back(EMPTY)}
         />
       )}
