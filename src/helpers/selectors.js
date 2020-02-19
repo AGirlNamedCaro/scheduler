@@ -1,4 +1,4 @@
-export function getAppointmentsForDay(state, day) {
+export default function getAppointmentsForDay(state, day) {
   //We need to find the object in our state.days array whose name === day
     //HOW?
       //Filter through the object and compare name properties
@@ -16,7 +16,5 @@ export function getAppointmentsForDay(state, day) {
       }
     }
     return matchingArray;
-
-
 
 }
