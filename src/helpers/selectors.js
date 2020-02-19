@@ -1,7 +1,4 @@
-export default function getAppointmentsForDay(state, day) {
-  //We need to find the object in our state.days array whose name === day
-    //HOW?
-      //Filter through the object and compare name properties
+export function getAppointmentsForDay(state, day) {
     const filteredDays = state.days.filter( dayObj => dayObj.name === day);
     const matchingArray = [];
 
@@ -16,5 +13,23 @@ export default function getAppointmentsForDay(state, day) {
       }
     }
     return matchingArray;
+}
+
+export function getInterview(state, interview) {
+  if(!interview) {
+    return null;
+  }
+  console.log("interviewer: ", state.interviewers);
+  const interviewObject = {};
+  for(const key in state.interviewers) {
+    if(Number(key) === interview.interviewer) {
+      interviewObject['student']= interview.student
+      interviewObject['interviewer'] = state.interviewers[key];
+      }
+
+    }
+
+    
+      return interviewObject;
 
 }

@@ -4,7 +4,8 @@ import DayList from "components/DayList";
 import 'components/Appointment';
 import Appointment from "./Appointment";
 import axios from 'axios';
-import getAppointmentsForDay from '../helpers/selectors'
+import {getAppointmentsForDay, getInterview} from '../helpers/selectors'
+
 
 
 export default function Application(props) {
@@ -16,23 +17,29 @@ export default function Application(props) {
   const [state, setState] = useState({
     day: "Monday",
     days: [],
-    appointments: {}
+    appointments: {},
+    interviewers: {}
   });
 
+  
   useEffect(() => {
     let daysURL = "http://localhost:8001/api/days";
     let apptsURL = "http://localhost:8001/api/appointments";
-
+    let intervURL = "http://localhost:8001/api/interviewers";
+    
     const promiseDays = axios.get(daysURL);
     const promiseAppts = axios.get(apptsURL);
-      Promise.all([
-        Promise.resolve(promiseDays), 
-        Promise.resolve(promiseAppts)
-      ])
-          .then((all) => {
-          setState(prev => ({...prev, days: all[0].data,appointments: all[1].data }));
+    const promiseInterviewers = axios.get(intervURL);
+    Promise.all([
+      Promise.resolve(promiseDays), 
+      Promise.resolve(promiseAppts),
+      Promise.resolve(promiseInterviewers)
+    ])
+    .then((all) => {
+      setState(prev => ({...prev, days: all[0].data,appointments: all[1].data, interviewers: all[2].data }));
     })
   });
+
   
   return (
     <main className="layout">
@@ -43,20 +50,20 @@ export default function Application(props) {
               className="sidebar--centered"
               src="images/logo.png"
               alt="Interview Scheduler"
-            />
+              />
             <hr className="sidebar__separator sidebar--centered" />
             <nav className="sidebar__menu">
             <DayList
               days={state.days}
               day={state.day}
               setDay={setDay}
-            />
+              />
             </nav>
             <img
               className="sidebar__lhl sidebar--centered"
               src="images/lhl.png"
               alt="Lighthouse Labs"
-            />
+              />
           </div>
           
         }
@@ -64,13 +71,18 @@ export default function Application(props) {
       
       <section className="schedule">
         {/* Replace this with the schedule elements durint the "The Scheduler" activity. */}
-        { getAppointmentsForDay(state,state.day).map(appointment =>(
-          <Appointment
+        { getAppointmentsForDay(state,state.day).map(appointment => {
+          const interview = getInterview(state, appointment.interview);
+          return (
+
+            <Appointment
             key={appointment.id}
             {...appointment}
-          />
-          
-        ) ) }
+            interview={interview}
+            />
+            
+          )
+          }) }
         <Appointment key="last" time="6pm" />
       </section>
     </main>
