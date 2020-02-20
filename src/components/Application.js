@@ -31,11 +31,13 @@ export default function Application(props) {
         interview
       }
     })
-    .then((
-    setState({
-    ...state,
-    appointments
-    })))
+    .then(() => {
+      setState({
+        ...state,
+        appointments
+        })
+    }
+    )
 }
 
 const cancelInterview = (id, interview) => {
@@ -56,11 +58,14 @@ const cancelInterview = (id, interview) => {
       interview
     }
   })
-  .then((
-  setState({
-  ...state,
-  appointments
-  })))
+  .then(() => {
+    setState({
+      ...state,
+      appointments
+      })
+  }
+  
+  )
 
 }
 
