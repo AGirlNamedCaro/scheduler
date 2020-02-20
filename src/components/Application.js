@@ -11,6 +11,39 @@ import {getAppointmentsForDay, getInterview, getInterviewersForDay} from '../hel
 export default function Application(props) {
   //This line adds 'STATE' to your application
 
+  function bookInterview(id, interview) {
+    console.log(id, interview);
+
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview}
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+
+    
+    return axios({
+      method: 'put',
+      url: `http://localhost:8001/api/appointments/${appointment.id}`,
+      data: {
+        interview
+      }
+    })
+    .then((
+    setState({
+    ...state,
+    appointments
+    })))
+
+   
+
+}
+
+
+  
+
   const setDay = day => setState(prev => ({ ...prev, day }));
 
 
@@ -81,12 +114,12 @@ export default function Application(props) {
             {...appointment}
             interview={interview}
             interviewers={interviewers}
-            
+            bookInterview={bookInterview}
             />
             
           )
           }) }
-        <Appointment key="last" time="6pm" />
+        <Appointment key="last" time="6pm"  />
       </section>
     </main>
   );

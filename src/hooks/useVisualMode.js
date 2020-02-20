@@ -10,7 +10,6 @@ export default function useVisualMode(initial) {
   const [history,setHistory] = useState([initial]);
   //return an object with a property mode
   const transition = (mode, replace = false) => {
-    console.log('BEFORE: ' ,history);
     if(replace) {
     
       history.pop();
@@ -18,7 +17,6 @@ export default function useVisualMode(initial) {
     }
     history.push(mode);
     setMode(mode);
-    console.log('After: ' ,history);
 
   }
   const back = (mode) => {
