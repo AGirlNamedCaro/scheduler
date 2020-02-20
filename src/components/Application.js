@@ -65,7 +65,7 @@ const cancelInterview = (id, interview) => {
 }
 
 
-  
+
 
   const setDay = day => setState(prev => ({ ...prev, day }));
 
