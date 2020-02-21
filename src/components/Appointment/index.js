@@ -41,9 +41,9 @@ export default function Appointment(props) {
   }
 
   function onDelete(id) {
-    const interview = null;
+    // const interview = null;
     transition(DELETING, true);
-    props.cancelInterview(props.id, interview)
+    props.cancelInterview(props.id)
     .then(()=> transition(EMPTY))
     .catch(error => transition(ERROR_DELETE,true));
   }
@@ -57,7 +57,7 @@ export default function Appointment(props) {
         student={props.interview.student}
         interviewer={props.interview.interviewer}
         onEdit={(id, interview) => transition(EDIT)}
-        onDelete={(id, interview) =>  transition(CONFIRM)}
+        onDelete={(id) =>  transition(CONFIRM)}
         />
       )}
       {mode === CREATE && (
