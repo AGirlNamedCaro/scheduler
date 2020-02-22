@@ -2,12 +2,12 @@ import React, {useReducer, useEffect} from "react";
 import "components/Application.scss";
 import 'components/Appointment';
 import axios from 'axios';
+import updateSpots from 'helpers/updateSpot';
 
 export default function useApplicationData() {
   
   
   const cancelInterview = (id) => {
-    
     const appointment = {
       ...state.appointments[id],
       interview: null
@@ -22,8 +22,8 @@ export default function useApplicationData() {
       url: `http://localhost:8001/api/appointments/${appointment.id}`
     })
     .then(() => {
-      dispatch({ type: SET_INTERVIEW, value: {appointments}})
-
+      dispatch({ type: SET_INTERVIEW, value: {appointments, days: updateSpots(state.day,state.days, 1)}})
+      
     }
     
     )
@@ -42,7 +42,8 @@ export default function useApplicationData() {
       [id]: appointment
     };
 
-    
+
+
     return axios({
       method: 'put',
       url: `http://localhost:8001/api/appointments/${appointment.id}`,
@@ -51,9 +52,9 @@ export default function useApplicationData() {
       }
     })
     .then(() => {
-      dispatch({ type: SET_INTERVIEW, value: {appointments} })
+      dispatch({ type: SET_INTERVIEW, value: {appointments, days: updateSpots(state.day,state.days, -1)}})
        
-    }
+      }
     )
 }
   
@@ -74,7 +75,6 @@ const setDay = (day) => {
   dispatch({ type: SET_DAY, value: {day} }) 
 }
 
-const reducer = (state, action) => {
   switch(action.type) {
     case SET_DAY: 
      {
@@ -85,7 +85,7 @@ const reducer = (state, action) => {
         return { ...state, ...action.value }
       }
       case SET_INTERVIEW: {
-        return { ...state, ...action.value}
+        return { ...state, ...action.value }
       }
       default:
       throw new Error(
@@ -94,13 +94,13 @@ const reducer = (state, action) => {
   }
  }
 
- const [state,dispatch] = useReducer(reducer,initialState);
+  const [state,dispatch] = useReducer(reducer,initialState);
 
   
   useEffect(() => {
-    let daysURL = "http://localhost:8001/api/days";
-    let apptsURL = "http://localhost:8001/api/appointments";
-    let intervURL = "http://localhost:8001/api/interviewers";
+    let daysURL = "/api/days";
+    let apptsURL = "/api/appointments";
+    let intervURL = "/api/interviewers";
     
     const promiseDays = axios.get(daysURL);
     const promiseAppts = axios.get(apptsURL);
