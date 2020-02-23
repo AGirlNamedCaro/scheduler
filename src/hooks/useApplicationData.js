@@ -75,6 +75,8 @@ const setDay = (day) => {
   dispatch({ type: SET_DAY, value: {day} }) 
 }
 
+const reducer = (state, action) => {
+
   switch(action.type) {
     case SET_DAY: 
      {
@@ -92,7 +94,8 @@ const setDay = (day) => {
         `Tried to reduce with unsupported action type: ${action.type}`
       );
   }
- }
+}
+ 
 
   const [state,dispatch] = useReducer(reducer,initialState);
 
@@ -124,4 +127,5 @@ const setDay = (day) => {
       cancelInterview
     }
 
-}
+  }
+
