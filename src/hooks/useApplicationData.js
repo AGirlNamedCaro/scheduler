@@ -3,11 +3,7 @@ import "components/Application.scss";
 import 'components/Appointment';
 import axios from 'axios';
 import updateSpots from 'helpers/updateSpot';
-// import reducer, {
-//   SET_DAY,
-//   SET_APPLICATION_DATA,
-//   SET_INTERVIEW
-// } from '../reducers/application';
+import reducer, { SET_APPLICATION_DATA, SET_DAY, SET_INTERVIEW} from '../reducers/application';
 
 export default function useApplicationData() {
   
@@ -71,34 +67,11 @@ const initialState = {
   
 }
 
-const SET_DAY = "SET_DAY";
-const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
-const SET_INTERVIEW = "SET_INTERVIEW";
 
 const setDay = (day) => {
   dispatch({ type: SET_DAY, value: {day} }) 
 }
 
-const reducer = (state, action) => {
-
-  switch(action.type) {
-    case SET_DAY: 
-     {
-       return { ...state, ...action.value}
-    }
-    case SET_APPLICATION_DATA:
-      {
-        return { ...state, ...action.value }
-      }
-      case SET_INTERVIEW: {
-        return { ...state, ...action.value }
-      }
-      default:
-      throw new Error(
-        `Tried to reduce with unsupported action type: ${action.type}`
-      );
-  }
-}
  
 
   const [state,dispatch] = useReducer(reducer,initialState);
