@@ -2,7 +2,7 @@
 
 ## Final Product
 
-!["Desktop view Interview Scheduler"](https://github.com/AGirlNamedCaro/tweeter/blob/master/screenshots/Screen%20Shot%202020-01-30%20at%203.49.16%20PM.png?raw=true)
+!["Desktop view Interview Scheduler"](https://github.com/AGirlNamedCaro/scheduler/blob/master/images/Screen%20Shot%202020-02-25%20at%203.51.04%20PM.png?raw=true)
 
 ## Setup
 
