@@ -8,6 +8,7 @@
  import InterviewerListItem from "components/InterviewerListItem";
 
  export default function InterviewList(props) {
+
    const interviewers = props.interviewers.map(interviewer => {
      return(
        <InterviewerListItem

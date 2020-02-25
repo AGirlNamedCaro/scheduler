@@ -3,6 +3,11 @@ import "components/Application.scss";
 import 'components/Appointment';
 import axios from 'axios';
 import updateSpots from 'helpers/updateSpot';
+import reducer, {
+  SET_DAY,
+  SET_APPLICATION_DATA,
+  SET_INTERVIEW
+} from '../reducers/application';
 
 export default function useApplicationData() {
   
@@ -17,8 +22,7 @@ export default function useApplicationData() {
       [id]: appointment
     };
     
-    return axios({
-      method: 'delete',
+    return axios.delete({
       url: `http://localhost:8001/api/appointments/${appointment.id}`
     })
     .then(() => {
@@ -44,8 +48,7 @@ export default function useApplicationData() {
 
 
 
-    return axios({
-      method: 'put',
+    return axios.put({
       url: `http://localhost:8001/api/appointments/${appointment.id}`,
       data: {
         interview
