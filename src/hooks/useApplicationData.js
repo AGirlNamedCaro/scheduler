@@ -18,10 +18,10 @@ export default function useApplicationData() {
       [id]: appointment
     };
     
-    return axios({
-      url: `/api/appointments/${appointment.id}`,
-      method: "delete"
-    })
+    return axios.delete(
+      `/api/appointments/${appointment.id}`
+      
+    )
     .then(() => {
       dispatch({ type: SET_INTERVIEW, value: {appointments, days: updateSpots(state.day,state.days, 1)}})
       
@@ -32,7 +32,6 @@ export default function useApplicationData() {
   }
   
   function bookInterview(id, interview) {
-    console.log("Heyyyyyyy");
 
     const appointment = {
       ...state.appointments[id],
@@ -43,13 +42,13 @@ export default function useApplicationData() {
       [id]: appointment
     };
 
-    return axios({
-      url: `/api/appointments/${appointment.id}`,
-      data: {
+    return axios.put(
+      `/api/appointments/${appointment.id}`,
+       {
         interview
-      },
-      method: "put"
-    })
+      }
+      // method: "put"
+    )
   
     .then(() => {
       dispatch({ type: SET_INTERVIEW, value: {appointments, days: updateSpots(state.day,state.days, -1)}})
