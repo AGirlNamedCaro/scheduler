@@ -3,11 +3,11 @@ import "components/Application.scss";
 import 'components/Appointment';
 import axios from 'axios';
 import updateSpots from 'helpers/updateSpot';
-import reducer, {
-  SET_DAY,
-  SET_APPLICATION_DATA,
-  SET_INTERVIEW
-} from '../reducers/application';
+// import reducer, {
+//   SET_DAY,
+//   SET_APPLICATION_DATA,
+//   SET_INTERVIEW
+// } from '../reducers/application';
 
 export default function useApplicationData() {
   
@@ -22,8 +22,9 @@ export default function useApplicationData() {
       [id]: appointment
     };
     
-    return axios.delete({
-      url: `http://localhost:8001/api/appointments/${appointment.id}`
+    return axios({
+      url: `/api/appointments/${appointment.id}`,
+      method: "delete"
     })
     .then(() => {
       dispatch({ type: SET_INTERVIEW, value: {appointments, days: updateSpots(state.day,state.days, 1)}})
@@ -35,7 +36,7 @@ export default function useApplicationData() {
   }
   
   function bookInterview(id, interview) {
-    console.log(id, interview);
+    console.log("Heyyyyyyy");
 
     const appointment = {
       ...state.appointments[id],
@@ -46,14 +47,14 @@ export default function useApplicationData() {
       [id]: appointment
     };
 
-
-
-    return axios.put({
-      url: `http://localhost:8001/api/appointments/${appointment.id}`,
+    return axios({
+      url: `/api/appointments/${appointment.id}`,
       data: {
         interview
-      }
+      },
+      method: "put"
     })
+  
     .then(() => {
       dispatch({ type: SET_INTERVIEW, value: {appointments, days: updateSpots(state.day,state.days, -1)}})
        
