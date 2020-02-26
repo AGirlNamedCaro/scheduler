@@ -1,5 +1,6 @@
 # Interview Scheduler
-
+## About
+This app receives data from an api and the user is able to edit data, create new data, and delete.
 ## Final Product
 
 !["Desktop view Interview Scheduler"](https://github.com/AGirlNamedCaro/scheduler/blob/master/images/Screen%20Shot%202020-02-25%20at%203.51.04%20PM.png?raw=true)
